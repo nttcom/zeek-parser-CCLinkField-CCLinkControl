@@ -1,0 +1,8 @@
+# Zeek-specific Spicy logic.
+
+module Zeek_NO_IP;
+
+import NO_IP;
+import zeek;
+
+# TODO: Add anything you need here.
