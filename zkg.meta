@@ -15,7 +15,7 @@ zkg_version = 2.13.0
 features = spicy-packet-analyzer
 
 [template_vars]
-name = spicy_cc_link_noip
+name = spicy_cc_link_field_control
 analyzer = cc_link_noip
 unit = Packet
 
