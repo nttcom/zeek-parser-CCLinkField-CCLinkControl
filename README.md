@@ -76,11 +76,11 @@ whichコマンドの確認結果に従って、Zeekファイルを以下のパ�
 | dst_mac | string | 宛先MACアドレス |
 | service | string | プロトコル名 |
 | pdu_type | string | プロトコルの関数名 |
-| cmd | string | 関数内の情報 |
-| node_type | string | 関数内の情報 |
-| node_id | int | 関数内の情報 |
-| connection_info | string | 関数内の情報 |
-| src_node_number | string | 関数内の情報 |
+| cmd | string | transient1とtransient2が特有のフィールド |
+| node_type | string | ノード種別 |
+| node_id | int | ノード識別子 |
+| connection_info | string | transientDataの識別子 |
+| src_node_number | string | 自ノード番号 |
 | number | int | パケット出現回数 |
 | ts_end | time | 最後に通信した時のタイムスタンプ |
 
