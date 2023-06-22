@@ -35,7 +35,7 @@ spicyc v1.5.0 (d0bc6053)
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/analyzer/ 
 ```
 
-ソースコードコンパイルして、オブジェクトファイルを以下のパスにコピーします。
+ソースコードをコンパイルして、オブジェクトファイルを以下のパスにコピーします。
 
 ```
 ~$ spicyz -o cc_link_noip.hlto cc_link_noip.spicy cc_link_noip.evt
