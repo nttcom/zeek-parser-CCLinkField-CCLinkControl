@@ -21,20 +21,19 @@ zeek version 5.0.0
 ~$ spicyc -version
 spicyc v1.5.0 (d0bc6053)
 
-# Check Zeek path (this will be used later, so make a note of it)
-# If the following is the output, it means Zeek is in /opt/zeek/.
+# The path of zeek in this manual is based on the following output
 ~$ which zeek
 /opt/zeek/bin/zeek
 ````
 
-Git clone this repository to your local environment.
+`git clone` this repository to your local environment.
 
 ```
 ~$ git clone https://github.com/nttcom/zeek-parser-CCLinkField-CCLinkControl.git
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/analyzer/ 
 ```
 
-Compile the parser and move the generated object file to the following path according to the confirmation result of the which command.
+Source code compile and copy the object files to the following path.
 
 ```
 ~$ spicyz -o cc_link_noip.hlto cc_link_noip.spicy cc_link_noip.evt
@@ -42,14 +41,14 @@ Compile the parser and move the generated object file to the following path acco
 ~$ cp cc_link_noip.hlto /opt/zeek/lib/zeek-spicy/modules/
 ```
 
-Move the Zeek file to the following path according to the confirmation result of the which command.
+Similarly, copy the Zeek file to the following path.
 
 ```
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/scripts/
 ~$ cp main.zeek /opt/zeek/share/zeek/site/
 ```
 
-Import the newly added parser at the end of the following file.
+Finally, import the Zeek plugin.
 
 ```
 ~$ tail /opt/zeek/share/zeek/site/local.zeek
@@ -57,7 +56,7 @@ Import the newly added parser at the end of the following file.
 @load cc_link_noip
 ```
 
-This plug-in generates cclink-ie.log.
+This plug-in generates `cclink-ie.log`.
 
 ```
 ~$ zeek -Cr zeek-parser-CCLinkField-CCLinkControl/testing/Traces/cclink_ief_basic_only.pcap local.zeek
@@ -65,7 +64,7 @@ This plug-in generates cclink-ie.log.
 
 ## Log type and description
 
-This parser monitors all functions of CC-Link IE Field and CC-Link IE Control and outputs cclink-ie.log.
+This parser monitors all functions of CC-Link IE Field and CC-Link IE Control and outputs `cclink-ie.log`.
 
 | Field | Type | Description |
 | --- | --- | --- |

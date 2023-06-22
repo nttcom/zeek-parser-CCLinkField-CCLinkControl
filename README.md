@@ -23,20 +23,19 @@ zeek version 5.0.0
 ~$ spicyc -version
 spicyc v1.5.0 (d0bc6053)
 
-# Zeek本体のパス確認（これは後に使いますので、メモしてください）
-# 以下が出力の場合、Zeekの本体は/opt/zeek/にあることを意味しています。
+# 本マニュアルではZeekのパスが以下であることを前提としています。
 ~$ which zeek
 /opt/zeek/bin/zeek
 ```
 
-本リポジトリをローカル環境に git clone します。
+本リポジトリをローカル環境に `git clone` します。
 
 ```
 ~$ git clone https://github.com/nttcom/zeek-parser-CCLinkField-CCLinkControl.git
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/analyzer/ 
 ```
 
-パーサをコンパイルし、whichコマンドの確認結果に従って、生成したオブジェクトファイルを以下のパスに移動します。
+ソースコードコンパイルして、オブジェクトファイルを以下のパスにコピーします。
 
 ```
 ~$ spicyz -o cc_link_noip.hlto cc_link_noip.spicy cc_link_noip.evt
@@ -44,14 +43,14 @@ spicyc v1.5.0 (d0bc6053)
 ~$ cp cc_link_noip.hlto /opt/zeek/lib/zeek-spicy/modules/
 ```
 
-whichコマンドの確認結果に従って、Zeekファイルを以下のパスに移動します。
+同様にZeekファイルを以下のパスにコピーします。
 
 ```
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/scripts/
 ~$ cp main.zeek /opt/zeek/share/zeek/site/
 ```
 
-以下のファイルの最後に新規追加したパーサをインポートします。
+最後にZeekプラグインをインポートします。
 
 ```
 ~$ tail /opt/zeek/share/zeek/site/local.zeek
@@ -59,7 +58,7 @@ whichコマンドの確認結果に従って、Zeekファイルを以下のパ�
 @load cc_link_noip
 ```
 
-本プラグインを使うことで cclink-ie.log が生成されます。
+本プラグインを使うことで `cclink-ie.log` が生成されます。
 
 ```
 ~$ zeek -Cr zeek-parser-CCLinkField-CCLinkControl/testing/Traces/cclink_ief_basic_only.pcap local.zeek
