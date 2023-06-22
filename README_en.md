@@ -64,7 +64,7 @@ This plug-in generates `cclink-ie.log`.
 
 ## Log type and description
 
-This parser monitors all functions of CC-Link IE Field and CC-Link IE Control and outputs `cclink-ie.log`.
+This plug-in monitors all functions of CC-Link IE Field and CC-Link IE Control and outputs them as `cclink-ie.log`.
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -81,7 +81,7 @@ This parser monitors all functions of CC-Link IE Field and CC-Link IE Control an
 | number | int | number of packet occurrence |
 | ts_end | time | Timestamp of the last communication |
 
-An example of cclink-ie.log is as follows
+An example of `cclink-ie.log` is as follows
 
 ```
 #separator \x09

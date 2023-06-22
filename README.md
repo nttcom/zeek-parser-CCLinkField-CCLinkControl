@@ -66,7 +66,7 @@ spicyc v1.5.0 (d0bc6053)
 
 ## ログのタイプと説明
 
-このパーサはCC-Link IE FieldとCC-Link IE Controlの全関数を監視し、cclink-ie.logを出力します。
+本プラグインはCC-Link IE FieldとCC-Link IE Controlの全ての関数を監視して`cclink-ie.log`として出力します。
 
 | フィールド | タイプ | 説明 |
 | --- | --- | --- |
@@ -83,7 +83,7 @@ spicyc v1.5.0 (d0bc6053)
 | number | int | パケット出現回数 |
 | ts_end | time | 最後に通信した時のタイムスタンプ |
 
-cclink-ie.log の例は以下のとおりです。
+`cclink-ie.log` の例は以下のとおりです。
 
 ```
 #separator \x09
