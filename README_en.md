@@ -1,4 +1,4 @@
-# spicy_cc_link_field_control
+# Zeek-Parser-CCLinkField-CCLinkControl
 
 ## Overview
 
