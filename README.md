@@ -1,16 +1,16 @@
-# spicy_cc_link_field_control
+# Zeek-Parser-CCLinkField-CCLinkControl
 
 English is [here](https://github.com/nttcom/zeek-parser-CCLinkField-CCLinkControl/blob/main/README_en.md)
 
 ## 概要
 
-spicy_cc_link_field_controlとは[CC-Linkファミリー](https://www.cc-link.org/ja/cclink/index.html)のCC-Link IE FieldとCC-Link IE Controlを解析できる、Spicyで作成したZeekのパーサです。
+Zeek-Parser-CCLinkField-CCLinkControlとは[CC-Linkファミリー](https://www.cc-link.org/ja/cclink/index.html)のCC-Link IE FieldとCC-Link IE Controlを解析できるZeekプラグインです。
 
 ## 使い方
 
 ### マニュアルインストール
 
-本パーサを利用する前に、ZeekとSpicyが既にインストールされていることを確認します。
+本プラグインを利用する前に、Zeek, Spicyがインストールされていることを確認します。
 
 ```
 # Zeekのチェック
@@ -22,16 +22,21 @@ zeek version 5.0.0
 1.3.16
 ~$ spicyc -version
 spicyc v1.5.0 (d0bc6053)
+
+# Zeek本体のパス確認（これは後に使いますので、メモしてください）
+# 以下が出力の場合、Zeekの本体は/opt/zeek/にあることを意味しています。
+~$ which zeek
+/opt/zeek/bin/zeek
 ```
 
-手動で本パーサを利用する場合は、以下のコマンドでリポジトリをローカルにクロンします。
+本リポジトリをローカル環境に git clone します。
 
 ```
 ~$ git clone https://github.com/nttcom/zeek-parser-CCLinkField-CCLinkControl.git
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/analyzer/ 
 ```
 
-パーサをコンパイルし、生成したオブジェクトファイルを以下のパスに移動します。
+パーサをコンパイルし、whichコマンドの確認結果に従って、生成したオブジェクトファイルを以下のパスに移動します。
 
 ```
 ~$ spicyz -o cc_link_noip.hlto cc_link_noip.spicy cc_link_noip.evt
@@ -39,7 +44,7 @@ spicyc v1.5.0 (d0bc6053)
 ~$ cp cc_link_noip.hlto /opt/zeek/lib/zeek-spicy/modules/
 ```
 
-Zeekファイルを以下のパスに移動します。
+whichコマンドの確認結果に従って、Zeekファイルを以下のパスに移動します。
 
 ```
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/scripts/
@@ -54,9 +59,11 @@ Zeekファイルを以下のパスに移動します。
 @load cc_link_noip
 ```
 
-以上でパーサを利用できる様になり、Zeekを実行すれば、cclink-ie.logが生成されます。
+本プラグインを使うことで cclink-ie.log が生成されます。
 
-注意：zeekを/opt/以外にインストールした場合は読み替えてください。
+```
+~$ zeek -Cr zeek-parser-CCLinkField-CCLinkControl/testing/Traces/cclink_ief_basic_only.pcap local.zeek
+```
 
 ## ログのタイプと説明
 
@@ -65,8 +72,8 @@ Zeekファイルを以下のパスに移動します。
 | フィールド | タイプ | 説明 |
 | --- | --- | --- |
 | ts | time | 最初に通信した時のタイムスタンプ |
-| src_mac | string | 送信元MCAアドレス |
-| dst_mac | string | 送信先MCAアドレス |
+| src_mac | string | 送信元MACアドレス |
+| dst_mac | string | 宛先MACアドレス |
 | service | string | プロトコル名 |
 | pdu_type | string | プロトコルの関数名 |
 | cmd | string | 関数内の情報 |
@@ -77,7 +84,7 @@ Zeekファイルを以下のパスに移動します。
 | number | int | パケット出現回数 |
 | ts_end | time | 最後に通信した時のタイムスタンプ |
 
-生成したログの例は以下に示しました。
+cclink-ie.log の例は以下のとおりです。
 
 ```
 #separator \x09
@@ -102,4 +109,4 @@ Zeekファイルを以下のパスに移動します。
 
 ## 関連ソフトウエア
 
-本パーサは[OsecT](https://github.com/nttcom/OsecT)で利用されています。
+本プラグインは[OsecT](https://github.com/nttcom/OsecT)で利用されています。
