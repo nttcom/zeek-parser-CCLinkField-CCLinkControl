@@ -1,11 +1,89 @@
-spicy_cc_link_field_control
-=================================
+# Zeek-Parser-CCLinkField-CCLinkControl
 
-spicy_cc_link_noipとはSpicyで作成したZeekのパーサです。
+English is [here](https://github.com/nttcom/zeek-parser-CCLinkField-CCLinkControl/blob/main/README_en.md)
 
-OsecTで利用されています。
+## 概要
 
-以下の様なログを生成できます。
+Zeek-Parser-CCLinkField-CCLinkControlとは[CC-Linkファミリー](https://www.cc-link.org/ja/cclink/index.html)のCC-Link IE FieldとCC-Link IE Controlを解析できるZeekプラグインです。
+
+## 使い方
+
+### マニュアルインストール
+
+本プラグインを利用する前に、Zeek, Spicyがインストールされていることを確認します。
+
+```
+# Zeekのチェック
+~$ zeek -version
+zeek version 5.0.0
+
+# Spicyのチェック
+~$ spicyz -version
+1.3.16
+~$ spicyc -version
+spicyc v1.5.0 (d0bc6053)
+
+# 本マニュアルではZeekのパスが以下であることを前提としています。
+~$ which zeek
+/opt/zeek/bin/zeek
+```
+
+本リポジトリをローカル環境に `git clone` します。
+
+```
+~$ git clone https://github.com/nttcom/zeek-parser-CCLinkField-CCLinkControl.git
+~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/analyzer/ 
+```
+
+ソースコードをコンパイルして、オブジェクトファイルを以下のパスにコピーします。
+
+```
+~$ spicyz -o cc_link_noip.hlto cc_link_noip.spicy cc_link_noip.evt
+~$ # cc_link_noip.hltoが生成されます
+~$ cp cc_link_noip.hlto /opt/zeek/lib/zeek-spicy/modules/
+```
+
+同様にZeekファイルを以下のパスにコピーします。
+
+```
+~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/scripts/
+~$ cp main.zeek /opt/zeek/share/zeek/site/
+```
+
+最後にZeekプラグインをインポートします。
+
+```
+~$ tail /opt/zeek/share/zeek/site/local.zeek
+...省略...
+@load cc_link_noip
+```
+
+本プラグインを使うことで `cclink-ie.log` が生成されます。
+
+```
+~$ zeek -Cr zeek-parser-CCLinkField-CCLinkControl/testing/Traces/cclink_ief_basic_only.pcap local.zeek
+```
+
+## ログのタイプと説明
+
+本プラグインはCC-Link IE FieldとCC-Link IE Controlの全ての関数を監視して`cclink-ie.log`として出力します。
+
+| フィールド | タイプ | 説明 |
+| --- | --- | --- |
+| ts | time | 最初に通信した時のタイムスタンプ |
+| src_mac | string | 送信元MACアドレス |
+| dst_mac | string | 宛先MACアドレス |
+| service | string | プロトコル名 |
+| pdu_type | string | プロトコルの関数名 |
+| cmd | string | transient1とtransient2の特有のフィールド |
+| node_type | string | ノード種別 |
+| node_id | int | ノード識別子 |
+| connection_info | string | transientDataの識別子 |
+| src_node_number | string | 自ノード番号 |
+| number | int | パケット出現回数 |
+| ts_end | time | 最後に通信した時のタイムスタンプ |
+
+`cclink-ie.log` の例は以下のとおりです。
 
 ```
 #separator \x09
@@ -27,3 +105,7 @@ OsecTで利用されています。
 1667903833.066240	00:11:11:11:11:11	00:00:00:00:00:01	cclink_ie_control	token	-	-	-	-	0x0001	57	1667903833.133351
 #close	2023-03-15-16-56-36
 ```
+
+## 関連ソフトウエア
+
+本プラグインは[OsecT](https://github.com/nttcom/OsecT)で利用されています。
