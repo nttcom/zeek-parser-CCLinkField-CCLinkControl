@@ -2,16 +2,16 @@
 
 ## Overview
 
-spicy_cc_link_field_control is a parser for CC-Link IE Field and CC-Link IE Control in [CC-Link family](https://www.cc-link.org/ja/cclink/index.html), Zeek's parser created by Spicy.
+Zeek-Parser-CCLinkField-CCLinkControl is a Zeek plug-in that can analyze CC-Link IE Field and CC-Link IE Control of the [CC-Link family](https://www.cc-link.org/ja/cclink/index.html).
 
 ## Usage
 
 ### Manual Installation
 
-Before using this parser, make sure that Zeek and Spicy are already installed.
+Before using this plug-in, make sure that Zeek, Spicy is installed.
 
 ````
-## Check Zeek
+# Check Zeek
 ~$ zeek -version
 zeek version 5.0.0
 
@@ -20,16 +20,21 @@ zeek version 5.0.0
 1.3.16
 ~$ spicyc -version
 spicyc v1.5.0 (d0bc6053)
+
+# Check Zeek path (this will be used later, so make a note of it)
+# If the following is the output, it means Zeek is in /opt/zeek/.
+~$ which zeek
+/opt/zeek/bin/zeek
 ````
 
-If you want to use this parser manually, you can use the following command to clone the repository locally.
+Git clone this repository to your local environment.
 
 ```
 ~$ git clone https://github.com/nttcom/zeek-parser-CCLinkField-CCLinkControl.git
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/analyzer/ 
 ```
 
-Compile the parser and move the generated object files to the following path.
+Compile the parser and move the generated object file to the following path according to the confirmation result of the which command.
 
 ```
 ~$ spicyz -o cc_link_noip.hlto cc_link_noip.spicy cc_link_noip.evt
@@ -37,7 +42,7 @@ Compile the parser and move the generated object files to the following path.
 ~$ cp cc_link_noip.hlto /opt/zeek/lib/zeek-spicy/modules/
 ```
 
-Move the Zeek file to the following path.
+Move the Zeek file to the following path according to the confirmation result of the which command.
 
 ```
 ~$ cd ~/zeek-parser-CCLinkField-CCLinkControl/scripts/
@@ -52,9 +57,11 @@ Import the newly added parser at the end of the following file.
 @load cc_link_noip
 ```
 
-Now you can use the parser, run Zeek, and cclink-ie.log will be generated.
+This plug-in generates cclink-ie.log.
 
-Note: If you installed zeek in a location other than /opt/, you will need to read it differently.
+```
+~$ zeek -Cr zeek-parser-CCLinkField-CCLinkControl/testing/Traces/cclink_ief_basic_only.pcap local.zeek
+```
 
 ## Log type and description
 
@@ -67,15 +74,15 @@ This parser monitors all functions of CC-Link IE Field and CC-Link IE Control an
 | dst_mac | string | destination MCA address |
 | service | string | protocol name |
 | pdu_type | string | protocol function name |
-| cmd | string | Information in function |
-| node_type | string | Information in function |
-| node_id | int | Information in function |
-| connection_info | string | Information in function |
-| src_node_number | string | Information in function |
+| cmd | string | specific fields for transient1 and transient2 |
+| node_type | string | node type |
+| node_id | int | node identifier |
+| connection_info | string | Identifier of transientData |
+| src_node_number | string | own-node-number |
 | number | int | number of packet occurrence |
 | ts_end | time | Timestamp of the last communication |
 
-An example of the generated log is shown below.
+An example of cclink-ie.log is as follows
 
 ```
 #separator \x09
@@ -100,4 +107,4 @@ An example of the generated log is shown below.
 
 ## Other Software
 
-This parser is used by [OsecT](https://github.com/nttcom/OsecT).
+This plug-in is used by [OsecT](https://github.com/nttcom/OsecT).

@@ -76,7 +76,7 @@ whichコマンドの確認結果に従って、Zeekファイルを以下のパ�
 | dst_mac | string | 宛先MACアドレス |
 | service | string | プロトコル名 |
 | pdu_type | string | プロトコルの関数名 |
-| cmd | string | transient1とtransient2が特有のフィールド |
+| cmd | string | transient1とtransient2の特有のフィールド |
 | node_type | string | ノード種別 |
 | node_id | int | ノード識別子 |
 | connection_info | string | transientDataの識別子 |
