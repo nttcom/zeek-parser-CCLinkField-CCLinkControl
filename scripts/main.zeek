@@ -1230,45 +1230,45 @@ event raw::cyclicDataIn2(p: raw_pkt_hdr, c_priority: string, srcNodeNumber: stri
 # -----------------------------------
 
 # 集約 local debug用
-#event zeek_done()
-#	{
-#	# print "zeek_done()";
-#	# print res_aggregationData;
-#	for ( i in res_aggregationData ){
-#		# print i;
-#		local info: Info = [];
-#		info$ts = res_aggregationData[i]$ts_s;
-#		info$src_mac = i$src_mac;
-#		info$dst_mac = i$dst_mac;
-#		info$service = i$service;
-#		info$pdu_type = i$pdu_type;
-#		if ( i?$cmd ){
-#			info$cmd = i$cmd;
-#		}
-#		if ( i?$node_type ){
-#			info$node_type = i$node_type;
-#		}
-#		if ( i?$node_id ){
-#			info$node_id = i$node_id;
-#		}
-#		if ( i?$connection_info ){
-#			info$connection_info = i$connection_info;
-#		}
-#		if ( i?$src_node_number ){
-#			info$src_node_number = i$src_node_number;
-#		}
-#		if ( res_aggregationData[i]?$ts_e ){
-#			info$ts_end = res_aggregationData[i]$ts_e;
-#		}
-#		if ( res_aggregationData[i]?$num ){
-#			info$number = res_aggregationData[i]$num;
-#		}
-#		# print res_aggregationData;
-#		# print info;
-#		Log::write(NO_IP::LOG, info);
-#	}
-#	Log::write(NO_IP::LOG, [$ts = network_time()]);
-#	Log::write(NO_IP::LOG, [$ts = network_time()]);
-#	# res_aggregationData = {};
-#	# print res_aggregationData;
-#	}
+event zeek_done()
+	{
+	# print "zeek_done()";
+	# print res_aggregationData;
+	for ( i in res_aggregationData ){
+		# print i;
+		local info: Info = [];
+		info$ts = res_aggregationData[i]$ts_s;
+		info$src_mac = i$src_mac;
+		info$dst_mac = i$dst_mac;
+		info$service = i$service;
+		info$pdu_type = i$pdu_type;
+		if ( i?$cmd ){
+			info$cmd = i$cmd;
+		}
+		if ( i?$node_type ){
+			info$node_type = i$node_type;
+		}
+		if ( i?$node_id ){
+			info$node_id = i$node_id;
+		}
+		if ( i?$connection_info ){
+			info$connection_info = i$connection_info;
+		}
+		if ( i?$src_node_number ){
+			info$src_node_number = i$src_node_number;
+		}
+		if ( res_aggregationData[i]?$ts_e ){
+			info$ts_end = res_aggregationData[i]$ts_e;
+		}
+		if ( res_aggregationData[i]?$num ){
+			info$number = res_aggregationData[i]$num;
+		}
+		# print res_aggregationData;
+		# print info;
+		Log::write(NO_IP::LOG, info);
+	}
+	Log::write(NO_IP::LOG, [$ts = network_time()]);
+	Log::write(NO_IP::LOG, [$ts = network_time()]);
+	# res_aggregationData = {};
+	# print res_aggregationData;
+	}
