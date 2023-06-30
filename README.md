@@ -8,6 +8,24 @@ Zeek-Parser-CCLinkField-CCLinkControlとは[CC-Linkファミリー](https://www.
 
 ## 使い方
 
+### パッケージマネージャ
+
+このスクリプトは[Zeek Package Manger](https://docs.zeek.org/projects/package-manager/en/stable/index.html)用のパッケージとして提供されています。
+
+```
+zkg refresh
+zkg install zeek-parser-CCLinkField-CCLinkControl
+```
+
+上記のコマンドを実行した後、本プラグインは利用可能なプラグインに追加されます。これは `zeek -N` を実行してテストできます。正しくインストールされていれば、`[Packet Analyzer] spicy::NO_IP (ANALYZER_SPICY__NO_IP)`が表示されます。
+
+以下の様に本プラグインを使うことで `cclink-ie.log` が生成されます。
+
+```
+zeek -Cr zeek-parser-CCLinkField-CCLinkControl/testing/Traces/cc_link_ief.pcap zeek-parser-CCLinkField-CCLinkControl
+```
+
+
 ### マニュアルインストール
 
 本プラグインを利用する前に、Zeek, Spicyがインストールされていることを確認します。
@@ -61,7 +79,7 @@ spicyc v1.5.0 (d0bc6053)
 本プラグインを使うことで `cclink-ie.log` が生成されます。
 
 ```
-~$ zeek -Cr zeek-parser-CCLinkField-CCLinkControl/testing/Traces/cclink_ief_basic_only.pcap local.zeek
+~$ zeek -Cr zeek-parser-CCLinkField-CCLinkControl/testing/Traces/cc_link_ief.pcap local.zeek
 ```
 
 ## ログのタイプと説明
